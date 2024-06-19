@@ -7,6 +7,9 @@ const getAnimal = require("./router/getAnimal");
 const postAnimal = require("./router/postAnimal");
 const searchAnimal = require("./router/searchAnimal");
 const deleteAnimal = require("./router/deleteAnimal");
+const getUser = require("./router/getUser");
+const getUserPOST = require("./router/searchPost");
+const createPost = require("./router/createPost");
 
 const app = express();
 const port = 8080;
@@ -25,7 +28,9 @@ sequelize
   .catch((err) => console.error("연결 실패", err));
 
 app.use(cors(corsOption));
-app.use(express.json()); // body-parser
+
+// body-parser
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", catRouter);
@@ -36,7 +41,9 @@ app.use("/", getAnimal);
 app.use("/", postAnimal);
 app.use("/", searchAnimal);
 app.use("/", deleteAnimal);
-
+app.use("/", getUser);
+app.use("/", getUserPOST);
+app.use("/", createPost);
 app.listen(port, () => {
   console.log(`${port} 에서 대기중`);
 });
